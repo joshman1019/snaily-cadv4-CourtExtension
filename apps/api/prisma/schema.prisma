@@ -1557,11 +1557,20 @@ model CourtEntry {
 }
 
 model CourtDate {
-  id           String     @id @default(uuid())
-  note         String?
-  date         DateTime
-  courtEntry   CourtEntry @relation(fields: [courtEntryId], references: [id], onDelete: Cascade)
-  courtEntryId String
+  id              String        @id @default(uuid())
+  note            String?
+  date            DateTime
+  courtEntry      CourtEntry    @relation(fields: [courtEntryId], references: [id], onDelete: Cascade)
+  courtEntryId    String
+  courtOfficial   CourtOfficial @relation(fields: [courtOfficialId], references: [id], onDelete: Cascade)
+  courtOfficialId String
+}
+
+model CourtOfficial {
+  id        String      @id @default(uuid())
+  name      String
+  title     String
+  courtDate CourtDate[]
 }
 
 // ems-fd
